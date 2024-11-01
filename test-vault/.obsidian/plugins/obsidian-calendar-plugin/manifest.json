@@ -1,0 +1,10 @@
+{
+  "id": "obsidian-calendar-plugin",
+  "name": "Calendar Plugin",
+  "version": "1.0.0",
+  "minAppVersion": "0.15.0",
+  "description": "Calendar plugin",
+  "author": "Pavel Koval",
+  "authorUrl": "https://github.com/kovalpv",
+  "isDesktopOnly": false
+}

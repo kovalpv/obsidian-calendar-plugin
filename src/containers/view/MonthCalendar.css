@@ -1,0 +1,29 @@
+.month-calendar {
+  position: relative;
+  width: 100% !important;
+  table-layout: fixed;
+}
+
+.month-calendar th,
+.month-calendar td {
+  text-align: center;
+}
+
+.month-calendar td {
+  height: 6rem;
+  max-height: 6rem !important;
+  overflow: hidden;
+}
+
+.month-calendar__actions {
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  visibility: hidden;
+}
+
+.month-calendar__day-title {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+}

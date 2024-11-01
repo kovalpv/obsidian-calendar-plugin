@@ -1,0 +1,12 @@
+{
+  "DateNavigator.Decrement.button.aria-label": "Decrement date",
+  "DateNavigator.Increment.button.aria-label": "Increment date",
+  "PeriodSelector.month.title": "Month",
+  "PeriodSelector.week.title": "Week",
+  "PeriodSelector.day.title": "Day",
+  "PeriodSelector.daily.title": "Daily",
+  "Calendar.day.action.open-note.title": "Open Note",
+  "Calendar.day.action.open-note.error": "Failed to open note for {{day}}",
+  "Calendar.day.action.copy-prev-day.title": "Copy from Previous Working Day",
+  "Calendar.failed-load-holidays": "Failed to load holidays for {{year}}."
+}

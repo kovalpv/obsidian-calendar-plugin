@@ -1,0 +1,18 @@
+.calendar-nav {
+  margin-left: 4px;
+  margin-bottom: 4px;
+}
+
+.calendar-nav__title {
+  position: relative;
+  display: inline-block;
+  font-size: 1.2rem;
+  line-height: 1.6rem;
+  font-weight: 600;
+  margin: 0 8px;
+  width: 12rem !important;
+  text-align: center;
+  background-color: #f0f0f0;
+  border-radius: 5px;
+  top: 3px;
+}

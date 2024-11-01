@@ -1,0 +1,18 @@
+{
+  "plugin-reloader:calendar-plugin": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "R"
+    }
+  ],
+  "plugin-reloader:obsidian-calendar-plugin": [
+    {
+      "modifiers": [
+        "Mod"
+      ],
+      "key": "R"
+    }
+  ]
+}

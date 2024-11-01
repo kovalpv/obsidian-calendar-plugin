@@ -1,0 +1,31 @@
+.calendar {
+  position: relative;
+  overflow: auto;
+  width: 100%;
+}
+
+.calendar-day:hover > .actions {
+  visibility: visible;
+}
+
+.calendar-day .task-list {
+  margin-top: 1.2rem;
+}
+
+.actions__action {
+  padding: 0px 4px !important;
+  height: 1.2rem;
+  width: 1.2rem;
+}
+
+.action__icon {
+  font-size: 8px;
+}
+
+.calendar-day__holiday {
+  background-color: var(--color-red) !important;
+}
+
+.calendar-day {
+  position: relative;
+}

@@ -1,0 +1,12 @@
+{
+  "DateNavigator.Decrement.button.aria-label": "Предыдущий",
+  "DateNavigator.Increment.button.aria-label": "Следующий",
+  "PeriodSelector.month.title": "Месяц",
+  "PeriodSelector.week.title": "Неделя",
+  "PeriodSelector.day.title": "День",
+  "PeriodSelector.daily.title": "Дейлики",
+  "Calendar.day.action.open-note.title": "Открыть заметку",
+  "Calendar.day.action.open-note.error": "Не удалось открыть заметку {{day}}",
+  "Calendar.day.action.copy-prev-day.title": "Копировать с предыдущего рабочего дня",
+  "Calendar.failed-load-holidays": "Не удалось загрузить выходные на {{year}} год."
+}
