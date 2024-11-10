@@ -13,6 +13,7 @@ export default class CustomCalendar extends Plugin {
 
   async onload() {
     await this.loadSettings();
+
     // @ts-ignore
     window.renderCalendar = (el: HTMLElement, settings: CalendarSettings): void => {
       const root = createRoot(el);

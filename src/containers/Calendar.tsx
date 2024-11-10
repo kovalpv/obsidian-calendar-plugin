@@ -41,7 +41,6 @@ export default function Calendar({ date: initialDate, period: initialPeriod }: C
   };
 
   useEffect(() => {
-    console.log("state.date", state.date.getFullYear());
     getYearHolidays(state.date)
       .then((d) => {
         dispatch({

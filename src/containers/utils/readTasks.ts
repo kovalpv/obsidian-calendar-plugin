@@ -1,5 +1,3 @@
-import globalPath from "path";
-
 import { normalizePath, TFile, TFolder } from "obsidian";
 
 import { DateUtils } from "../../DateUtils";
@@ -20,6 +18,15 @@ export function normalizeTaskPath(path: string, dateFormat: string) {
   const parts = dateFormat.split("-");
   const folder = `${parts[0]}/${parts[1]}`;
   return normalizePath(`${path}/${folder}/${filename}`);
+}
+
+function getFolderFromPath(filePath: string): string {
+  const trimmedPath = filePath.replace(/\/+$/, "").replace(/\\+$/, "");
+  const lastSlashIndex = Math.max(trimmedPath.lastIndexOf("/"), trimmedPath.lastIndexOf("\\"));
+  if (lastSlashIndex === -1) {
+    return "";
+  }
+  return trimmedPath.substring(0, lastSlashIndex);
 }
 
 export async function openFileInObsidian(path: string, dateFormat: string) {
@@ -156,7 +163,8 @@ export function copyPreviousDayUndoneTask({
   return app.vault
     .read(fromFile)
     .then((content) => {
-      const folder = globalPath.dirname(newPath);
+      console.log(`newPath: ${newPath}`);
+      const folder = getFolderFromPath(newPath);
       return createFolderIfNotExists(folder).then(() => content);
     })
     .then((content) => {

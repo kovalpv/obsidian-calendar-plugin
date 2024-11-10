@@ -1,6 +1,3 @@
-import fs from "fs";
-import path from "path";
-
 import { requestUrl } from "obsidian";
 
 import { CalendarProductionCalendarSource } from "./types";
@@ -25,25 +22,13 @@ async function getCalendarSourceSource(year: number): Promise<CalendarProduction
   return await fetchData(`https://xmlcalendar.ru/data/ru/${year}/calendar.json`);
 }
 
-function getPath(filename: string): string {
-  // @ts-ignore
-  const vaultPath = app.vault.adapter.getBasePath();
-  const pluginPath = ".obsidian/plugins/obsidian-calendar-plugin";
-
-  return path.join(vaultPath, pluginPath, filename);
-}
-
 async function getCalendarSource(year: number): Promise<CalendarProductionCalendarSource> {
-  const cacheFilePath = getPath(`${year}.json`);
-  fs.existsSync(cacheFilePath);
-  if (fs.existsSync(cacheFilePath)) {
-    const cachedData = fs.readFileSync(cacheFilePath, "utf8");
-    return await JSON.parse(cachedData);
+  try {
+    return await getCalendarSourceSource(year);
+  } catch (err) {
+    console.error(err);
+    throw err;
   }
-
-  const response = await getCalendarSourceSource(year);
-  fs.writeFileSync(cacheFilePath, JSON.stringify(response), "utf-8");
-  return response;
 }
 
 export default getCalendarSource;
