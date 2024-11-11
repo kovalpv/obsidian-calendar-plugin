@@ -8,5 +8,6 @@
   "Calendar.day.action.open-note.title": "Open Note",
   "Calendar.day.action.open-note.error": "Failed to open note for {{day}}",
   "Calendar.day.action.copy-prev-day.title": "Copy from Previous Working Day",
+  "Calendar.day.action.copy-month.title": "Copy tasks from the previous month",
   "Calendar.failed-load-holidays": "Failed to load holidays for {{year}}."
 }

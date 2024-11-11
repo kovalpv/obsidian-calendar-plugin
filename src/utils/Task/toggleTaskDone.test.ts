@@ -3,7 +3,7 @@ import toggleTaskDone from "./toggleTaskDone";
 import { Task } from "./types";
 
 describe("toggleTaskDone", () => {
-  it("should toggle the Task done status and call writeTask with updated Task", () => {
+  it("should toggle the Task done status and call formatTask with updated Task", () => {
     const task: Task = createTask("1", false, "Test Task");
 
     const actual = toggleTaskDone(task);

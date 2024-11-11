@@ -1,5 +1,4 @@
 import { requestUrl } from "obsidian";
-
 import { CalendarProductionCalendarSource } from "./types";
 
 async function fetchData(url: string) {

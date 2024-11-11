@@ -1,7 +1,7 @@
 import { Task } from "./types";
 
-function writeTask({ id, done, description }: Task): string {
+function formatTask({ id, done, description }: Task): string {
   return `- [${done ? "x" : " "}] ${id} ${description}`;
 }
 
-export default writeTask;
+export default formatTask;

@@ -1,5 +1,5 @@
 import { DateChange, initialState, PeriodChange, reducer } from "./CalendarState";
-import { Period } from "../AppTypes";
+import { Period } from "@src/AppTypes";
 
 describe("reducer", () => {
   it("should handle DATE_CHANGE action", () => {

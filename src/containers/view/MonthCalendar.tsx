@@ -1,13 +1,13 @@
 import { useEffect, useMemo } from "react";
 
-import { Actions } from "../../components";
-import createCalendarDay from "../utils/CreateCalendarDay";
+import { Actions } from "@src/components";
+import createCalendarDay from "./CreateCalendarDay";
 import Day from "../Day";
-import { useLocale } from "../../LocaleContext";
-import readTasks from "../utils/readTasks";
+import { useLocale } from "@src/LocaleContext";
+import { loadTasksInInterval } from "@utils/obsidian";
 import useTasks from "../useTasks";
-import DateSet from "../../ProductionCalendar/DateSet";
-import { CopyPreviousDayTasksAction, OpenNote } from "../actions";
+import { DateSet } from "@utils/date";
+import { CopyPreviousDaysTasksAction, CopyPreviousDayTasksAction, OpenNote } from "../actions";
 
 import "./MonthCalendar.css";
 
@@ -17,7 +17,7 @@ interface MonthCalendarProps {
 }
 
 function MonthCalendar({ date, holidays }: MonthCalendarProps) {
-  const { dateUtils, settings } = useLocale();
+  const { dateUtils, config } = useLocale();
   const { getTasks, setDayTasks, setTasks } = useTasks();
 
   const weekDays = dateUtils.getWeekDays();
@@ -33,15 +33,15 @@ function MonthCalendar({ date, holidays }: MonthCalendarProps) {
   }, [date, holidays]);
 
   useEffect(() => {
-    readTasks({
-      path: settings.folder,
+    loadTasksInInterval({
+      path: config.folder,
       start,
       end,
       dateUtils
     }).then((tasks) => {
       setTasks(tasks);
     });
-  }, [start, end, dateUtils, settings.folder]);
+  }, [start, end, dateUtils, config.folder]);
 
   return (
     <table className="month-calendar">
@@ -66,6 +66,12 @@ function MonthCalendar({ date, holidays }: MonthCalendarProps) {
                   holidays={holidays}
                 >
                   <CopyPreviousDayTasksAction
+                    className="actions__action"
+                    date={day.date}
+                    setTasks={setDayTasks(day.date)}
+                    holidays={holidays}
+                  />
+                  <CopyPreviousDaysTasksAction
                     className="actions__action"
                     date={day.date}
                     setTasks={setDayTasks(day.date)}

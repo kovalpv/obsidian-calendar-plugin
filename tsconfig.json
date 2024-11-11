@@ -13,13 +13,23 @@
     "allowJs": true,
     "jsx": "react-jsx",
     "moduleResolution": "node",
+    "baseUrl": ".",
     "rootDir": "src",
+    "paths": {
+      "@src/*": [
+        "./src/*"
+      ],
+      "@utils/*": [
+        "./src/utils/*"
+      ]
+    },
     "noImplicitReturns": true,
     "noImplicitThis": true,
     "noImplicitAny": true,
     "strictNullChecks": true,
     "resolveJsonModule": true,
-    "strict": true
+    "strict": true,
+    "forceConsistentCasingInFileNames": true
   },
   "include": [
     "src/**/*",
@@ -35,6 +45,7 @@
   ],
   "types": [
     "node",
+    "obsidian",
     "typePatches",
     "@testing-library/jest-dom",
     "jest"

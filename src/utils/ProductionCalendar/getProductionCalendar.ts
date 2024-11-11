@@ -1,4 +1,4 @@
-import DateSet from "./DateSet";
+import { DateSet } from "@utils/date";
 import { MonthProductionCalendarSource } from "./types";
 
 export type YearHolidays = {

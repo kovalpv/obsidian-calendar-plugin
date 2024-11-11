@@ -1,8 +1,8 @@
 import { PluginManifest } from "obsidian";
 import { createContext, FC, PropsWithChildren, useContext, useState } from "react";
 
-import { CalendarSettings, LocaleType } from "./AppTypes";
-import createDateUtils, { DateUtils } from "./DateUtils";
+import { CalendarConfig, LocaleType } from "./AppTypes";
+import { createDateUtils, DateUtils } from "@utils/date";
 import i18n from "./i18n";
 
 interface LocaleContextType {
@@ -10,19 +10,19 @@ interface LocaleContextType {
   localeChange: (locale: LocaleType) => void;
   manifest: PluginManifest;
   dateUtils: DateUtils;
-  settings: CalendarSettings;
+  config: CalendarConfig;
 }
 
 export const LocaleContext = createContext<LocaleContextType | undefined>(undefined);
 
 interface LocaleProviderProps {
-  readonly settings: CalendarSettings;
+  readonly config: CalendarConfig;
   readonly manifest: PluginManifest;
 }
 
-export const LocaleProvider: FC<LocaleProviderProps & PropsWithChildren> = ({ settings, manifest, children }) => {
-  const [locale, setLocale] = useState<LocaleType>("ru");
-  const [dateUtils, setDateUtils] = useState<DateUtils>(createDateUtils("ru"));
+export const LocaleProvider: FC<LocaleProviderProps & PropsWithChildren> = ({ config, manifest, children }) => {
+  const [locale, setLocale] = useState<LocaleType>(config.locale ?? "ru");
+  const [dateUtils, setDateUtils] = useState<DateUtils>(createDateUtils(config.locale ?? "ru"));
 
   const changeLocale = (newLocale: LocaleType) => {
     switch (newLocale) {
@@ -48,7 +48,7 @@ export const LocaleProvider: FC<LocaleProviderProps & PropsWithChildren> = ({ se
         locale,
         dateUtils,
         manifest,
-        settings
+        config
       }}
     >
       {children}

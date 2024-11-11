@@ -1,45 +1,30 @@
 import { useCallback } from "react";
 
-import { readTask1 } from "./utils/readTasks";
-import { TaskFile } from "../AppTypes";
-import { useLocale } from "../LocaleContext";
-import { toggleTaskDone } from "../Task";
-import { TaskList } from "../components";
+import { TaskWithSource } from "@src/AppTypes";
+import { useLocale } from "@src/LocaleContext";
+import { TaskList } from "@src/components";
+import { createTaskToggleHandler } from "@utils/obsidian";
 
 interface DayProps {
   readonly date: Date;
-  readonly tasks: TaskFile[];
-  readonly setTasks: (tasks: TaskFile[]) => void;
+  readonly tasks: TaskWithSource[];
+  readonly setTasks: (tasks: TaskWithSource[]) => void;
 }
 
 function Day({ date, tasks, setTasks }: DayProps) {
-  const { dateUtils, settings } = useLocale();
-
+  const { dateUtils, config } = useLocale();
   const toggleTask = useCallback(
-    (date: Date) => (d: TaskFile) => {
-      const result = toggleTaskDone(d.task);
-
-      app.vault
-        .read(d.source)
-        .then((content) => {
-          const newContent = content.replace(d.sourceLine, result);
-
-          return app.vault.modify(d.source, newContent).then(() =>
-            readTask1({
-              path: settings.folder,
-              date: date,
-              dateUtils
-            })
-          );
-        })
-        .then((updatedTasks) => {
-          setTasks(updatedTasks);
-        });
+    (task: TaskWithSource) => {
+      createTaskToggleHandler({
+        path: config.folder,
+        date,
+        dateUtils
+      })(task).then(setTasks);
     },
-    []
+    [config.folder, date, dateUtils]
   );
 
-  return <TaskList date={date} tasks={tasks} taskClick={toggleTask(date)} />;
+  return <TaskList date={date} tasks={tasks} onTaskClick={toggleTask} />;
 }
 
 export default Day;

@@ -1,5 +1,5 @@
-import { Period } from "../AppTypes";
-import DateSet from "../ProductionCalendar/DateSet";
+import { Period } from "@src/AppTypes";
+import { DateSet } from "@utils/date";
 
 interface StateProps {
   readonly date: Date;

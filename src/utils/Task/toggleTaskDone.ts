@@ -1,9 +1,9 @@
 import createTask from "./createTask";
 import { Task } from "./types";
-import writeTask from "./writeTask";
+import formatTask from "./formatTask";
 
 function toggleTaskDone({ id, done, description }: Task): string {
-  return writeTask(createTask(id, !done, description));
+  return formatTask(createTask(id, !done, description));
 }
 
 export default toggleTaskDone;

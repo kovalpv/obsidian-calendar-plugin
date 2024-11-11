@@ -1,4 +1,4 @@
-import DateSet from "./DateSet";
+import { DateSet } from "@utils/date";
 import getProductionCalendarMonth from "./getProductionCalendar";
 
 describe("getProductionCalendar", () => {

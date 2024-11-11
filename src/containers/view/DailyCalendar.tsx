@@ -1,13 +1,13 @@
 import { useEffect, useMemo } from "react";
 
-import { Actions } from "../../components";
-import { useLocale } from "../../LocaleContext";
-import createCalendarDay from "../utils/CreateCalendarDay";
+import { Actions } from "@src/components";
+import { useLocale } from "@src/LocaleContext";
+import createCalendarDay from "./CreateCalendarDay";
 import Day from "../Day";
-import readTasks from "../utils/readTasks";
+import { loadTasksInInterval } from "@utils/obsidian";
 import useTasks from "../useTasks";
-import DateSet from "../../ProductionCalendar/DateSet";
-import { CopyPreviousDayTasksAction, OpenNote } from "../actions";
+import { DateSet } from "@utils/date";
+import { CopyPreviousDaysTasksAction, CopyPreviousDayTasksAction, OpenNote } from "../actions";
 import "./WeekCalendar.css";
 
 interface DayCalendarProps {
@@ -16,7 +16,7 @@ interface DayCalendarProps {
 }
 
 function DayCalendar({ date, holidays }: DayCalendarProps) {
-  const { dateUtils, settings } = useLocale();
+  const { dateUtils, config } = useLocale();
   const { getTasks, setDayTasks, setTasks } = useTasks();
   const { weekDays, weeks, start, end } = useMemo(() => {
     const days = [dateUtils.getPreviousDay(date, holidays), date].map(createCalendarDay(holidays));
@@ -31,15 +31,15 @@ function DayCalendar({ date, holidays }: DayCalendarProps) {
   }, [date, holidays]);
 
   useEffect(() => {
-    readTasks({
-      path: settings.folder,
+    loadTasksInInterval({
+      path: config.folder,
       start,
       end,
       dateUtils
     }).then((tasks) => {
       setTasks(tasks);
     });
-  }, [start, end, dateUtils, settings.folder]);
+  }, [start, end, dateUtils, config.folder]);
 
   return (
     <table className="week-calendar">
@@ -52,7 +52,6 @@ function DayCalendar({ date, holidays }: DayCalendarProps) {
       </thead>
       <tbody>
         <tr>
-          {/*<td>{dateUtils.formatWeekShort(weeks[0].date)}</td>*/}
           {weeks.map((day) => (
             <td key={day.date.toString()} className={day.classes}>
               <div className="week-calendar__day-title">{dateUtils.formatDayShort(day.date)}</div>
@@ -64,6 +63,12 @@ function DayCalendar({ date, holidays }: DayCalendarProps) {
                 holidays={holidays}
               >
                 <CopyPreviousDayTasksAction
+                  className="actions__action"
+                  date={day.date}
+                  setTasks={setDayTasks(day.date)}
+                  holidays={holidays}
+                />
+                <CopyPreviousDaysTasksAction
                   className="actions__action"
                   date={day.date}
                   setTasks={setDayTasks(day.date)}

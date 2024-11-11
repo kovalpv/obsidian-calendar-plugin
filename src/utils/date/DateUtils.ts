@@ -12,8 +12,8 @@ import {
 } from "date-fns";
 import { enUS, ru } from "date-fns/locale";
 
-import { LocaleType, Period } from "./AppTypes";
-import DateSet from "./ProductionCalendar/DateSet";
+import { LocaleType, Period } from "../../AppTypes";
+import { DateSet } from "@utils/date/index";
 
 export type DateUtils = {
   formatDate(date: Date): string;

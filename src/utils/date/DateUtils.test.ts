@@ -1,7 +1,6 @@
 import { startOfDay } from "date-fns";
-
-import createDateUtils, { DateUtils } from "./DateUtils";
-import DateSet from "./ProductionCalendar/DateSet";
+import createDateUtils, { DateUtils } from "@utils/date/DateUtils";
+import { DateSet } from "@utils/date/index";
 
 describe("DateUtilsRu", () => {
   let dateUtils: DateUtils;

@@ -1,4 +1,4 @@
-import DateSet from "./DateSet";
+import { DateSet } from "@utils/date";
 import getProductionCalendar from "./getProductionCalendar";
 import { CalendarProductionCalendarSource } from "./types";
 

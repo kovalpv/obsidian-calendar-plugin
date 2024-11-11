@@ -3,13 +3,13 @@ import { useEffect, useReducer } from "react";
 import { useTranslation } from "react-i18next";
 
 import { initialState, reducer } from "./CalendarState";
-import { Period } from "../AppTypes";
-import { DateNavigator, PeriodSelector } from "../components";
-import i18n from "../i18n";
+import { Period } from "@src/AppTypes";
+import { DateNavigator, PeriodSelector } from "@src/components";
+import i18n from "@src/i18n";
 import { DailyCalendar, DayCalendar, MonthCalendar, WeekCalendar } from "./view";
-import { useLocale } from "../LocaleContext";
-import { getYearHolidays } from "../ProductionCalendar";
-import DateSet from "../ProductionCalendar/DateSet";
+import { useLocale } from "@src/LocaleContext";
+import { DateSet } from "@utils/date";
+import { getYearHolidays } from "@utils/ProductionCalendar";
 import "./Calendar.css";
 
 interface CalendarProps {

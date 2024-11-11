@@ -1,17 +1,17 @@
 import { useCallback, useState } from "react";
 
-import { useLocale } from "../LocaleContext";
-import { TaskFile } from "../AppTypes";
+import { useLocale } from "@src/LocaleContext";
+import { TaskWithSource } from "@src/AppTypes";
 
 type UseTaskResult = {
-  getTasks: (date: Date) => TaskFile[];
-  setDayTasks: (date: Date) => (tasks: TaskFile[]) => void;
-  setTasks: (tasks: Record<string, TaskFile[]>) => void;
+  getTasks: (date: Date) => TaskWithSource[];
+  setDayTasks: (date: Date) => (tasks: TaskWithSource[]) => void;
+  setTasks: (tasks: Record<string, TaskWithSource[]>) => void;
 };
 
 function useTasks(): UseTaskResult {
   const { dateUtils } = useLocale();
-  const [tasks, setTasks] = useState<Record<string, TaskFile[]>>({});
+  const [tasks, setTasks] = useState<Record<string, TaskWithSource[]>>({});
 
   const getTasks = useCallback(
     (date: Date) => {
@@ -21,7 +21,7 @@ function useTasks(): UseTaskResult {
   );
 
   const setDayTasks = useCallback(
-    (date: Date) => (tasks: TaskFile[]) => {
+    (date: Date) => (tasks: TaskWithSource[]) => {
       setTasks((prev) => {
         return {
           ...prev,

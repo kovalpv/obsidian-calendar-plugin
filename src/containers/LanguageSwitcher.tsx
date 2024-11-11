@@ -1,6 +1,6 @@
 import { FC } from "react";
 
-import { useLocale } from "../LocaleContext";
+import { useLocale } from "@src/LocaleContext";
 
 import "./LanguageSwitcher.css";
 
