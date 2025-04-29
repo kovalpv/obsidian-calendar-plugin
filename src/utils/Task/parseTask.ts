@@ -1,7 +1,7 @@
 import { Task } from "./types";
 
 export const TASK_REGEX = new RegExp(
-  "^-\\s{1}\\[(?<isDone>.){1}\\]\\s*(?<id>[A-zА-я0-9-\\[\\]\\(\\):\\/.]*)\\s(?<description>.*)$"
+  "^(?<whitespaces>[\\s]*)-\\s{1}\\[(?<isDone>.){1}\\]\\s*(?<id>[A-zА-я0-9-\\[\\]\\(\\):\\/.]*)\\s(?<description>.*)$"
 );
 
 function parseTask(str: string): Task | null {
@@ -14,7 +14,9 @@ function parseTask(str: string): Task | null {
       // @ts-ignore
       done: m.groups["isDone"] === "x" || m.groups["isDone"] === "X",
       // @ts-ignore
-      description: m.groups["description"]
+      description: m.groups["description"],
+      // @ts-ignore
+      whitespaces: m.groups["whitespaces"]
     };
   }
   return null;

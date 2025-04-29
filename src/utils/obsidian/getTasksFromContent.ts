@@ -5,9 +5,15 @@ import { parseTask } from "src/utils/Task";
 export default function getTasksFromContent(file: TFile): (content: string) => TaskWithSource[] {
   return (content: string) => {
     const lines = content.split("\n");
+    let group = "";
 
     return lines
       .map((line) => {
+        if (line.startsWith("##")) {
+          group = line.replace(/^#+/, "").trim();
+          return null;
+        }
+
         const task = parseTask(line);
         if (!task) {
           return null;
@@ -17,7 +23,8 @@ export default function getTasksFromContent(file: TFile): (content: string) => T
           source: file,
           description: task.description,
           task: task,
-          sourceLine: line
+          sourceLine: line,
+          group
         };
       })
       .filter((x) => x != null);

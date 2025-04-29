@@ -19,7 +19,8 @@ interface CalendarProps {
 
 export default function Calendar({ date: initialDate, period: initialPeriod }: CalendarProps) {
   const { t } = useTranslation();
-  const { locale, dateUtils } = useLocale();
+  const { locale, dateUtils, config, configChanged } = useLocale();
+
   const [state, dispatch] = useReducer(reducer, {
     ...initialState,
     date: initialDate,
@@ -34,9 +35,14 @@ export default function Calendar({ date: initialDate, period: initialPeriod }: C
   }, [locale]);
 
   const changeDate = (increment: boolean) => {
+    const newDate = dateUtils.adjustDate(state.date, increment, state.period);
+    configChanged?.({
+      ...config,
+      date: newDate
+    });
     dispatch({
       type: "DATE_CHANGE",
-      payload: dateUtils.adjustDate(state.date, increment, state.period)
+      payload: newDate
     });
   };
 
@@ -54,6 +60,10 @@ export default function Calendar({ date: initialDate, period: initialPeriod }: C
   }, [state.date.getFullYear()]);
 
   const changeCurrentPeriod = (newPeriod: Period) => {
+    configChanged?.({
+      ...config,
+      period: newPeriod
+    });
     dispatch({ type: "PERIOD_CHANGE", payload: newPeriod });
   };
 

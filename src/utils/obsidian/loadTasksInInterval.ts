@@ -3,7 +3,7 @@ import { DateUtils } from "@utils/date";
 import { normalizeTaskPath } from "@utils/obsidian/index";
 import { readTasksFromFile } from "./getTasksFromContent";
 
-interface ReadTasksProps {
+export interface ReadTasksProps {
   readonly path: string;
   readonly start: Date;
   readonly end: Date;
